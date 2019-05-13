@@ -9,8 +9,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <title>POPULAR</title>
+    <title>HOME</title>
     <style type="text/css"> 
+
+ 
+
     ul.topnav {
         overflow: hidden;
         margin: 0;
@@ -47,15 +50,62 @@
     }
     .btn{
         background-color: #BBBB;
+       
+        color: #fff
+        
+    }
+    
+    .btn:hover {
+        background-color: gray;
+    }
+
+
+    .box{
+        position: relative;
+        float: right;
+        width: 25%;
+        height: auto;
+    }
+
+    .img{
+        width: 250px;
+        height: auto;
+       margin-left: 50px;
+       margin-top: 50px;
     }
 
     </style>
 </head>
 <body>
 <ul class="topnav">
-    <li><a href="home.php">Home</a></li>
+	<li><a href="home.php">Home</a></li>
     <li><a href="popular.php">Popular</a></li>
     <li><a href="upload.php">Upload</a></li>
 </ul>
+<ul></ul>
+    <div class="box">
+        <img class="img" src="images/img1.jpg" alt="">
+    </div>
+    <div class="box">
+        <img class="img" src="images/img2.jpg" alt="">
+    </div>
+    <div class="box">
+        <img class="img" src="images/img3.jpg" alt="">
+    </div>
+    <div class="box">
+        <img class="img" src="images/img9.jpg" alt="">
+    </div>
+    <div class="box">
+        <img class="img" src="images/img5.jpg" alt="">
+    </div>
+    <div class="box">
+        <img class="img" src="images/img6.jpg" alt="">
+    </div>
+    <div class="box">
+        <img class="img" src="images/img7.jpg" alt="">
+    </div>
+    <div class="box">
+        <img class="img" src="images/img8.jpg" alt="">
+    </div>
 </body>
 </html>

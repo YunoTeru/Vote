@@ -1,3 +1,20 @@
+<?php
+
+    require 'classes/homeDAO.php';
+
+    $display = new Display;
+    $displaylist = $display->getAllDisplay();
+    if(isset($_POST['upload'])){
+        $display_name = $_POST['display_name'];
+        $display_user = $_POST['display_user'];
+        $display_img = $_FILES['display_img']['name'];
+        $tmp_file_name = $_FILES['display_img']['tmp_name'];
+        $directory = "images/";
+        $result = $display->addDisplay($display_name, $display_user, $display_img, $tmp_file_name, $directory);
+        echo $result;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +28,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <title>UPLOAD</title>
     <style type="text/css"> 
+
     ul.topnav {
         overflow: hidden;
         margin: 0;
@@ -40,6 +58,55 @@
             float: none;
         }
     }
+    .form{
+        border-style: ridge;
+        padding: 50px;
+        width:60%;
+        height: auto;                                          
+        margin: 20px auto 20px auto;
+        margin-top: 50px;
+    }
+
+    .contacth2{
+        /* font-family: 'Great Vibes', cursive; */
+        font-size: 50px;
+        margin-top: 50px;
+    }
+
+    .send{
+        text-align: center;
+    }
+
+    input{
+        width: 400px;
+        padding: 20px;
+        font-size: 20px;
+    }
+
+    form{
+        padding: 20px;
+    }
+
+    textarea{
+        width: 400px;
+        padding: 20px;
+        height: 100px;
+    }
+
+    .btn{
+        color: white;
+        text-shadow: 1px 1px 0px black;
+        border: 3px solid gray;
+        background-color: #5B5B5B;
+        padding: 10px;
+        width: 450px;
+    }
+
+    .btn:hover{
+        color: white;
+        border-top: 2px solid #ABA9A9;
+        background-color: #444444;
+    }
 
 
     </style>
@@ -50,5 +117,25 @@
     <li><a href="popular.php">Popular</a></li>
     <li><a href="upload.php">Upload</a></li>
 </ul>
+
+<div class="send">
+		<h2 class="contacth2" >Upload Your File</h2>
+		<form class="form" action="" method="post" enctype="multipart/form-data">
+			<h4>Title<br>
+            <input type="text" name="display_name" maxlength="30" class="mt-1"><br>
+            </h5>
+            <h5>
+			User Name<br>
+            <input type="text" name="display_user" maxlength="30" class="mt-1"><br>
+            </h5>
+            <h5>
+            Choose Your File<br>
+            <input type="file" name="display_img" maxlength="30" class="mt-1">
+            </h5>
+            <!-- <input type="submit" value="UPLOAD" id="submit" name="upload" class="mt-5"> -->
+            <a href="home.php" class="btn">UPLOAD</a>
+            </h4>
+		</form>		
+	</div>	
 </body>
 </html>

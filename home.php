@@ -1,3 +1,36 @@
+<?php
+
+    session_start();
+
+    if($_SESSION['logstat'] != "Active"){
+        header('Location: index.php');
+    }else{
+        //echo "Welcome User: ".$_SESSION['name']."<a href='../logout.php'>Logout</a>";
+    }
+
+    // // require 'classes/userDAO.php';
+    // $userdao = new UserAccessObject;
+    // $userlist = $userdao->retrieveALLUser();
+
+    
+    require 'classes/homeDAO.php';
+   
+    $display = new Display;
+    $displaylist = $display->getAllDisplay();
+    $userdao = new UserAccessObject;
+    $userlist = $userdao->retrieveALLUser();
+
+    if(isset($_POST['upload'])){
+        $display_name = $_POST['display_name'];
+        $display_user = $_POST['display_user'];
+        $display_img = $_FILES['display_img']['name'];
+        $tmp_file_name = $_FILES['display_img']['tmp_name'];
+        $directory = "images/";
+        $result = $display->addDisplay($display_name, $display_user, $display_img, $tmp_file_name, $directory);
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +42,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    
     <title>HOME</title>
     <style type="text/css"> 
+
     ul.topnav {
         overflow: hidden;
         margin: 0;
@@ -71,6 +106,13 @@
        margin-top: 50px;
     }
 
+    .card{
+        display: inline-block;
+        padding: 10px;
+        margin-left: 55px;
+        margin-top: 20px;
+    }
+
     </style>
 </head>
 <body>
@@ -83,30 +125,19 @@
         <button class="btn text-white">Search<i class="fa fa-search"></i></button>
     </li>
 </ul>
-<ul></ul>
-    <div class="box">
-        <img class="img" src="images/img1.jpg" alt="">
-    </div>
-    <div class="box">
-        <img class="img" src="images/img2.jpg" alt="">
-    </div>
-    <div class="box">
-        <img class="img" src="images/img3.jpg" alt="">
-    </div>
-    <div class="box">
-        <img class="img" src="images/img9.jpg" alt="">
-    </div>
-    <div class="box">
-        <img class="img" src="images/img5.jpg" alt="">
-    </div>
-    <div class="box">
-        <img class="img" src="images/img6.jpg" alt="">
-    </div>
-    <div class="box">
-        <img class="img" src="images/img7.jpg" alt="">
-    </div>
-    <div class="box">
-        <img class="img" src="images/img8.jpg" alt="">
+<div class="container mt-5">
+        <div class="row">
+            <?php foreach($displaylist as $key=>$value){?>
+                <div class="card col-3 p-3 " style="width: 18rem;">
+                    <img class="card-img-top" src="<?php echo $value['display_img'];?>" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo $value['display_name']; ?></h5>
+                        <p class="card-text"><?php echo $value['display_user'] ?></p>
+                        <a href="#" class="btn btn-block btn-primary">VOTE</a>
+                    </div>
+                </div>
+            <?php }?>
+        </div>
     </div>
 </body>
 </html>
