@@ -1,17 +1,21 @@
 <?php
 
-    require 'classes/homeDAO.php';
-
+    require 'classes/displayDAO.php';
+    session_start();
     $display = new Display;
-    $displaylist = $display->getAllDisplay();
+    //$displaylist = $display->getAllDisplay();
     if(isset($_POST['upload'])){
         $display_name = $_POST['display_name'];
-        $display_user = $_POST['display_user'];
+        $display_user_id = $_POST['display_user'];
         $display_img = $_FILES['display_img']['name'];
         $tmp_file_name = $_FILES['display_img']['tmp_name'];
         $directory = "images/";
-        $result = $display->addDisplay($display_name, $display_user, $display_img, $tmp_file_name, $directory);
-        echo $result;
+        $result = $display->addDisplay($display_name, $display_user_id, $display_img, $tmp_file_name, $directory);
+        if($result){
+            header('Location: upload.php');
+        }else{
+            echo $result;
+        }      
     }
 ?>
 
@@ -122,18 +126,18 @@
 		<h2 class="contacth2" >Upload Your File</h2>
 		<form class="form" action="" method="post" enctype="multipart/form-data">
 			<h4>Title<br>
-            <input type="text" name="display_name" maxlength="30" class="mt-1"><br>
+            <input type="text" name="display_name"   maxlength="30" class="mt-1"><br>
             </h5>
             <h5>
 			User Name<br>
-            <input type="text" name="display_user" maxlength="30" class="mt-1"><br>
+            <input type="hidden" name="display_user" value="<?php echo $_SESSION['id']; ?>" maxlength="30" class="mt-1">
+            <input type="text" name="display_user_name" value="<?php echo $_SESSION['name']; ?>" maxlength="30" class="mt-1"><br>
             </h5>
             <h5>
             Choose Your File<br>
-            <input type="file" name="display_img" maxlength="30" class="mt-1">
+            <input type="file" name="display_img" class="mt-1">
             </h5>
-            <!-- <input type="submit" value="UPLOAD" id="submit" name="upload" class="mt-5"> -->
-            <a href="home.php" class="btn">UPLOAD</a>
+            <input type="submit" value="UPLOAD" id="submit" name="upload" class="mt-5">
             </h4>
 		</form>		
 	</div>	

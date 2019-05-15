@@ -46,11 +46,13 @@ if(isset($_POST['login'])){
         margin-top: 100px;
     }
 
-    #contacth2{
+    #contacth2{ 
         font-size: 50px;
         padding-top: 20px;
         font-family: 'Great Vibes', cursive;
     }
+       
+    
 
     .send{
         text-align: center;

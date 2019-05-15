@@ -2,7 +2,7 @@
 
 require 'connection.php';
 
-class Display extends Database{
+class Home extends Database{
 
     public function addDisplay($display_name, $display_user, $display_img, $tmp_file_name, $directory){
         //this will get the file extension of the uploaded file
@@ -27,6 +27,7 @@ class Display extends Database{
         
         
     }
+
     public function getAllDisplay(){
         $sql = "SELECT * FROM display";
         $result = $this->conn->query($sql);
@@ -35,15 +36,6 @@ class Display extends Database{
             $rows[] = $row;
         }
         return $rows;
-    }
-}
-
-class UserAccessObject extends Database{
-
-    public function registerUser($user_name, $user_email, $user_password){
-        $sql = "INSERT INTO user(user_name, user_email, user_password)  VALUES ('$user_name', '$user_email', '$user_password')";
-        $result = $this->conn->query($sql);   
-        return $result;
     }
 
     public function retrieveALLUser(){
@@ -57,38 +49,27 @@ class UserAccessObject extends Database{
         }
         return $rows;
     }
-    
-    public function retrieveSingleUser($id){
-        $sql = "SELECT * FROM user WHERE user_id = '$id'";
-        $result = $this->conn->query($sql);
-        $row = $result->fetch_assoc();
-        return $row;
-    }
 
-    public function updateUser($user_name, $user_email, $user_password){
-        $sql = "UPDATE user SET user_name = '$user_name', user_email = '$user_email',
-                user_password = '$user_password') 
-                WHERE user_id = '$user_id'";
-        $result = $this->conn->query($sql);
-        return $result;
+    public function updateVote($display_id){
 
-    }
-    
-    public function deleteUser($user_id){
-        $sql = "UPDATE user SET user_status = 'D' WHERE user_id = '$user_id'";
-        $result = $this->conn->query($sql); 
-        return $result;
-    }
-    
-    public function login($email, $password){
-        $sql = "SELECT * FROM user
-                WHERE user_email = '$email' AND user_password = '$password'";
+        $sql = "UPDATE display SET display_vote = display_vote + 1 WHERE display_id = $display_id";
         $result = $this->conn->query($sql);
-        $row = $result->fetch_assoc();
-        return $row;
-    }
 
-   
+        // $display_id = $_GET['id'];
+
+        // // Distinguish 
+        // if ( !isset($_COOKIE['voted_'.$display_id]) ) {
+        //     // After GET
+        //     if (isset($_GET['vote'], $_GET['id']) ) {
+        //         $sql = "UPDATE display SET display_vote = display_vote + 1 WHERE display_id = $display_id";
+        //         $result = $this->conn->query($sql);
+        //         // add cookie
+        //         setcookie("voted_".$display_id, "voted_".$display_id);
+        //     }
+        // } else {
+        //     return "You are already voted";
+        // }
+    }
 
 }
 

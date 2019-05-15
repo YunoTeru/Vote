@@ -82,30 +82,6 @@
     <li><a href="popular.php">Popular</a></li>
     <li><a href="upload.php">Upload</a></li>
 </ul>
-<ul></ul>
-    <div class="box">
-        <img class="img" src="images/img1.jpg" alt="">
-    </div>
-    <div class="box">
-        <img class="img" src="images/img2.jpg" alt="">
-    </div>
-    <div class="box">
-        <img class="img" src="images/img3.jpg" alt="">
-    </div>
-    <div class="box">
-        <img class="img" src="images/img9.jpg" alt="">
-    </div>
-    <div class="box">
-        <img class="img" src="images/img5.jpg" alt="">
-    </div>
-    <div class="box">
-        <img class="img" src="images/img6.jpg" alt="">
-    </div>
-    <div class="box">
-        <img class="img" src="images/img7.jpg" alt="">
-    </div>
-    <div class="box">
-        <img class="img" src="images/img8.jpg" alt="">
-    </div>
+
 </body>
 </html>

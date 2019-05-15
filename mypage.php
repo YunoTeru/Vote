@@ -27,7 +27,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>My page</title>

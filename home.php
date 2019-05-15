@@ -8,17 +8,17 @@
         //echo "Welcome User: ".$_SESSION['name']."<a href='../logout.php'>Logout</a>";
     }
 
-    // // require 'classes/userDAO.php';
+    // require 'classes/userDAO.php';
     // $userdao = new UserAccessObject;
     // $userlist = $userdao->retrieveALLUser();
 
     
-    require 'classes/homeDAO.php';
+    require_once 'classes/homeDAO.php';
    
-    $display = new Display;
+    $display = new Home;
     $displaylist = $display->getAllDisplay();
-    $userdao = new UserAccessObject;
-    $userlist = $userdao->retrieveALLUser();
+    
+    $userlist = $display->retrieveALLUser();
 
     if(isset($_POST['upload'])){
         $display_name = $_POST['display_name'];
@@ -27,6 +27,11 @@
         $tmp_file_name = $_FILES['display_img']['tmp_name'];
         $directory = "images/";
         $result = $display->addDisplay($display_name, $display_user, $display_img, $tmp_file_name, $directory);
+    }
+
+    if(isset($_POST['vote'])){
+        $display->updateVote($_POST['display_id']);
+        setcookie("voted_".$_POST['display_id'], "voted_".$_POST['display_id']);
     }
 
 ?>
@@ -82,7 +87,6 @@
     }
     .btn{
         background-color: #BBBB;
-       
         color: #fff
         
     }
@@ -91,26 +95,16 @@
         background-color: gray;
     }
 
-
-    .box{
-        position: relative;
-        float: right;
-        width: 25%;
-        height: auto;
-    }
-
-    .img{
-        width: 250px;
-        height: auto;
-       margin-left: 50px;
-       margin-top: 50px;
-    }
-
+    
     .card{
         display: inline-block;
         padding: 10px;
-        margin-left: 55px;
+        margin-left: 65px; 
         margin-top: 20px;
+    }
+
+    .card-title{
+        margin-top: 10px;
     }
 
     </style>
@@ -125,15 +119,19 @@
         <button class="btn text-white">Search<i class="fa fa-search"></i></button>
     </li>
 </ul>
-<div class="container mt-5">
+<div class="container-fuild mt-4">
         <div class="row">
             <?php foreach($displaylist as $key=>$value){?>
-                <div class="card col-3 p-3 " style="width: 18rem;">
+                <div class="card" style="width: 18rem">
                     <img class="card-img-top" src="<?php echo $value['display_img'];?>" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $value['display_name']; ?></h5>
-                        <p class="card-text"><?php echo $value['display_user'] ?></p>
-                        <a href="#" class="btn btn-block btn-primary">VOTE</a>
+                        <i class="far fa-star"><?php echo $value['display_vote'];?></i>
+                        <h5 class="card-title"><?php echo $value['display_name'];?></h5>
+                        <p class="card-text">User:<?php echo $value['display_user_name']; ?></p>
+                        <form action="" method="post">
+                            <input type="hidden" name="display_id" value="<?php echo $value['display_id']; ?>">
+                            <input type="submit" value="VOTE" name="vote" class="btn btn-block">
+                        </form>
                     </div>
                 </div>
             <?php }?>
