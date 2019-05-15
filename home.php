@@ -115,17 +115,19 @@
     <li><a href="popular.php">Popular</a></li>
     <li><a href="upload.php">Upload</a></li>
     <li class="search">
+        <form action="" method="post">
         <input type="text" class="form-controle ">
-        <button class="btn text-white">Search<i class="fa fa-search"></i></button>
+        <button class="btn text-white" name="search" >Search<i class="fa fa-search"></i></button>
+        </form>
     </li>
 </ul>
 <div class="container-fuild mt-4">
         <div class="row">
             <?php foreach($displaylist as $key=>$value){?>
-                <div class="card" style="width: 18rem">
+                <div class="card bg-light" style="width: 18rem">
                     <img class="card-img-top" src="<?php echo $value['display_img'];?>" alt="Card image cap">
                     <div class="card-body">
-                        <i class="far fa-star"><?php echo $value['display_vote'];?></i>
+                        <i class="fab fa-gratipay">&ensp;<?php echo $value['display_vote'];?></i>
                         <h5 class="card-title"><?php echo $value['display_name'];?></h5>
                         <p class="card-text">User:<?php echo $value['display_user_name']; ?></p>
                         <form action="" method="post">

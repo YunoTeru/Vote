@@ -2,7 +2,7 @@
 
 require 'connection.php';
 
-class Home extends Database{
+class Popular extends Database{
 
     public function addDisplay($display_name, $display_user, $display_img, $tmp_file_name, $directory){
         //this will get the file extension of the uploaded file
@@ -29,7 +29,7 @@ class Home extends Database{
     }
 
     public function getAllDisplay(){
-        $sql = "SELECT * FROM display ORDER BY display_id DESC";
+        $sql = "SELECT * FROM display ORDER BY display_vote DESC";
         $result = $this->conn->query($sql);
         $rows = array();
         while($row = $result->fetch_assoc()){
