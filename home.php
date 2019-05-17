@@ -1,37 +1,33 @@
 <?php
 
     session_start();
-
+    $disable = NULL;
     if($_SESSION['logstat'] != "Active"){
         header('Location: index.php');
     }else{
         //echo "Welcome User: ".$_SESSION['name']."<a href='../logout.php'>Logout</a>";
     }
-
-    // require 'classes/userDAO.php';
-    // $userdao = new UserAccessObject;
-    // $userlist = $userdao->retrieveALLUser();
-
     
     require_once 'classes/homeDAO.php';
    
     $display = new Home;
     $displaylist = $display->getAllDisplay();
-    
     $userlist = $display->retrieveALLUser();
 
     if(isset($_POST['upload'])){
+        $user_name = $_POST['user_name'];
         $display_name = $_POST['display_name'];
         $display_user = $_POST['display_user'];
         $display_img = $_FILES['display_img']['name'];
         $tmp_file_name = $_FILES['display_img']['tmp_name'];
         $directory = "images/";
-        $result = $display->addDisplay($display_name, $display_user, $display_img, $tmp_file_name, $directory);
+        $result = $display->addDisplay($user_name, $display_name, $display_user, $display_img, $tmp_file_name, $directory);
     }
 
     if(isset($_POST['vote'])){
         $display->updateVote($_POST['display_id']);
         setcookie("voted_".$_POST['display_id'], "voted_".$_POST['display_id']);
+        header('Refresh:0');
     }
 
 ?>
@@ -60,6 +56,7 @@
     }
     ul.topnav li {
         float: left;
+
     }
     ul.topnav li a {
         display: block;
@@ -83,16 +80,16 @@
     .search{
         margin-top: 8px;
         position: relative;
-        left: 900px;
+        left: 1150px;
     }
     .btn{
-        background-color: #BBBB;
+        background-color: gray;
         color: #fff
         
     }
     
     .btn:hover {
-        background-color: gray;
+        background-color: #393A37;
     }
 
     
@@ -107,20 +104,36 @@
         margin-top: 10px;
     }
 
+    .sb{
+        background-color: gray;
+    }
+
+    .sb:hover{
+        background-color: #393A37;
+    }
+
+    .upload{
+        margin-left: 856px;
+    }
+
     </style>
 </head>
 <body>
 <ul class="topnav">
 	<li><a href="home.php">Home</a></li>
     <li><a href="popular.php">Popular</a></li>
-    <li><a href="upload.php">Upload</a></li>
-    <li class="search">
-        <form action="" method="post">
-        <input type="text" class="form-controle ">
-        <button class="btn text-white" name="search" >Search<i class="fa fa-search"></i></button>
-        </form>
+    <li><a href="#">User Ranking</a></li>
+    <li class="upload"><a href="upload.php">Upload</a></li>
+    <li class="mypic"><a href="#">My Picutures</a></li>
+    <li class="logout"><a href="logout.php">Logout</a></li>
     </li>
 </ul>
+<div class="search mt-3">
+    <form action="" method="post">
+        <input type="text" class="form-controle" name="search">
+        <input type="submit" class="sb btn text-white text-center" name="submit" value="SEARCH">
+    </form>
+</div>
 <div class="container-fuild mt-4">
         <div class="row">
             <?php foreach($displaylist as $key=>$value){?>
@@ -129,10 +142,17 @@
                     <div class="card-body">
                         <i class="fab fa-gratipay">&ensp;<?php echo $value['display_vote'];?></i>
                         <h5 class="card-title"><?php echo $value['display_name'];?></h5>
-                        <p class="card-text">User:<?php echo $value['display_user_name']; ?></p>
+                        <p class="card-text">User:<?php echo $value['user_name']; ?></p>
                         <form action="" method="post">
                             <input type="hidden" name="display_id" value="<?php echo $value['display_id']; ?>">
-                            <input type="submit" value="VOTE" name="vote" class="btn btn-block">
+                            <?php
+                            if($_SESSION['id']==$value['display_user_id']){
+                                $disable = "disabled='disabled'";
+                            }else{
+                                $disable=NULL;
+                            }
+                            ?>
+                            <input type="submit" value="VOTE" name="vote" class="btn btn-block" <?php echo $disable; ?> />
                         </form>
                     </div>
                 </div>

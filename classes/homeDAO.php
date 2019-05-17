@@ -29,7 +29,7 @@ class Home extends Database{
     }
 
     public function getAllDisplay(){
-        $sql = "SELECT * FROM display ORDER BY display_id DESC";
+        $sql = "SELECT * FROM display JOIN user ON display.display_user_id = user.user_id ORDER BY display_id DESC";
         $result = $this->conn->query($sql);
         $rows = array();
         while($row = $result->fetch_assoc()){

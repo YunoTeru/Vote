@@ -24,12 +24,10 @@ class Popular extends Database{
         }else{
             return $result = "Error! Unsupported file extension!";
         }
-        
-        
     }
 
     public function getAllDisplay(){
-        $sql = "SELECT * FROM display ORDER BY display_vote DESC";
+        $sql = "SELECT * FROM display JOIN user ON display.display_user_id = user.user_id  WHERE display_vote > 20 ORDER BY display_vote DESC";
         $result = $this->conn->query($sql);
         $rows = array();
         while($row = $result->fetch_assoc()){
@@ -39,9 +37,7 @@ class Popular extends Database{
     }
 
     public function retrieveALLUser(){
-       
         $sql = "SELECT * FROM user WHERE user_status = 'A'";
-        
         $result = $this->conn->query($sql);
         $rows = array();     
         while ($row=$result->fetch_assoc()){
@@ -51,24 +47,8 @@ class Popular extends Database{
     }
 
     public function updateVote($display_id){
-
         $sql = "UPDATE display SET display_vote = display_vote + 1 WHERE display_id = $display_id";
         $result = $this->conn->query($sql);
-
-        // $display_id = $_GET['id'];
-
-        // // Distinguish 
-        // if ( !isset($_COOKIE['voted_'.$display_id]) ) {
-        //     // After GET
-        //     if (isset($_GET['vote'], $_GET['id']) ) {
-        //         $sql = "UPDATE display SET display_vote = display_vote + 1 WHERE display_id = $display_id";
-        //         $result = $this->conn->query($sql);
-        //         // add cookie
-        //         setcookie("voted_".$display_id, "voted_".$display_id);
-        //     }
-        // } else {
-        //     return "You are already voted";
-        // }
     }
 
 }

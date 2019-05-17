@@ -1,5 +1,5 @@
 <?php 
-	require 'classes/homeDAO.php';
+	require 'classes/userDAO.php';
 	$userdao = new UserAccessObject;
 	if(isset($_POST['register'])){
 		$user_name = $_POST['user_name'];
@@ -7,7 +7,7 @@
 		$user_password = md5($_POST['user_password']);
 
 		$userdao->registerUser($user_name, $user_email, $user_password);
-		header('Location: mypage.php');
+		header('Location: home.php');
 	}
 ?> 
 <!DOCTYPE html>
