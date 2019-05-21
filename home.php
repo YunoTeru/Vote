@@ -122,9 +122,9 @@
 <ul class="topnav">
 	<li><a href="home.php">Home</a></li>
     <li><a href="popular.php">Popular</a></li>
-    <li><a href="#">User Ranking</a></li>
+    <li><a href="user_ranking.php">User Ranking</a></li>
     <li class="upload"><a href="upload.php">Upload</a></li>
-    <li class="mypic"><a href="#">My Picutures</a></li>
+    <li class="mypic"><a href="mypic.php">My Picutures</a></li>
     <li class="logout"><a href="logout.php">Logout</a></li>
     </li>
 </ul>

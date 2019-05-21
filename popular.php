@@ -4,15 +4,8 @@
 
     if($_SESSION['logstat'] != "Active"){
         header('Location: index.php');
-    }else{
-        //echo "Welcome User: ".$_SESSION['name']."<a href='../logout.php'>Logout</a>";
     }
 
-    // require 'classes/userDAO.php';
-    // $userdao = new UserAccessObject;
-    // $userlist = $userdao->retrieveALLUser();
-
-    
     require_once 'classes/popularDAO.php';
    
     $display = new Popular;
@@ -28,14 +21,10 @@
         $directory = "images/";
         $result = $display->addDisplay($user_name, $display_name, $display_user, $display_img, $tmp_file_name, $directory);
     }
-
     if(isset($_POST['vote'])){
         $display->updateVote($_POST['display_id']);
         setcookie("voted_".$_POST['display_id'], "voted_".$_POST['display_id']);
     }
-
-    
-
 ?>
 
 <!DOCTYPE html>
@@ -127,9 +116,9 @@
 <ul class="topnav">
 	<li><a href="home.php">Home</a></li>
     <li><a href="popular.php">Popular</a></li>
-    <li><a href="#">User Ranking</a></li>
+    <li><a href="user_ranking.php">User Ranking</a></li>
     <li class="upload"><a href="upload.php">Upload</a></li>
-    <li class="mypic"><a href="#">My Picutures</a></li>
+    <li class="mypic"><a href="mypic.php">My Picutures</a></li>
     <li class="logout"><a href="logout.php">Logout</a></li>
     </li>
 </ul>

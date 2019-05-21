@@ -2,7 +2,7 @@
 
 require 'connection.php';
 
-class Home extends Database{
+class Mypic extends Database{
 
     public function addDisplay($display_name, $display_user, $display_img, $tmp_file_name, $directory){
         $extension = pathinfo($display_img, PATHINFO_EXTENSION);
@@ -23,8 +23,8 @@ class Home extends Database{
         }
     }
 
-    public function getAllDisplay(){
-        $sql = "SELECT * FROM display JOIN user ON display.display_user_id = user.user_id ORDER BY display_id DESC";
+    public function getAllDisplay($id){
+        $sql = "SELECT * FROM display JOIN user ON display.display_user_id = user.user_id WHERE display.display_user_id = $id ORDER BY display_id DESC";
         $result = $this->conn->query($sql);
         $rows = array();
         while($row = $result->fetch_assoc()){
@@ -41,11 +41,6 @@ class Home extends Database{
         $rows[] = $row;
         }
         return $rows;
-    }
-
-    public function updateVote($display_id){
-        $sql = "UPDATE display SET display_vote = display_vote + 1 WHERE display_id = $display_id";
-        $result = $this->conn->query($sql);
     }
 
 }

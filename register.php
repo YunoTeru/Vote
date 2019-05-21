@@ -22,6 +22,66 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<title>Regiater</title>
+	<style type="text/css">
+	.form{
+        border-style: ridge;
+        padding: 0px 50px;
+        width:60%;
+        height: auto;                                          
+        margin: 20px auto 20px auto;
+        margin-top: 100px;
+        background-color: #ECECEC;
+    }
+
+    #contacth2{ 
+		font-size: 50px;
+        padding-top: 20px;
+		font-family: 'Great Vibes', cursive;
+	}
+       
+    .send{
+        text-align: center;
+    }
+
+    input{
+        width: 400px;
+        padding: 20px;
+        font-size: 20px;
+    }
+
+    form{
+        padding: 20px;
+    }
+
+    textarea{
+        width: 400px;
+        padding: 20px;
+        height: 100px;
+    }
+
+    input#submit{
+
+        /*width: 200px;*/
+        margin-top: 50px;
+        color: white;
+        text-shadow: 1px 1px 0px black;
+        border: 3px solid gray;
+        background-color: #5B5B5B;
+        padding: 10px;
+        width: 450px;
+    }
+
+    input#submit:hover{
+
+		color: white;
+		border-top: 2px solid #ABA9A9;
+		background-color: #444444;
+	}
+	
+    .body{
+        background-color: grey;
+	}
+		</style>
 </head>
 <body>
 

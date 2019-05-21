@@ -5,9 +5,7 @@ require 'connection.php';
 class Popular extends Database{
 
     public function addDisplay($display_name, $display_user, $display_img, $tmp_file_name, $directory){
-        //this will get the file extension of the uploaded file
         $extension = pathinfo($display_img, PATHINFO_EXTENSION);
-        //apple.png
         $array_extensions = array('png', 'jpg', 'jpeg', 'gif', 'JPG');
 
         if(in_array($extension, $array_extensions)){
@@ -20,14 +18,13 @@ class Popular extends Database{
             }else{
                 return $result = "Error in uploading the file";
             }
-            
         }else{
             return $result = "Error! Unsupported file extension!";
         }
     }
 
     public function getAllDisplay(){
-        $sql = "SELECT * FROM display JOIN user ON display.display_user_id = user.user_id  WHERE display_vote > 20 ORDER BY display_vote DESC";
+        $sql = "SELECT * FROM display JOIN user ON display.display_user_id = user.user_id  WHERE display_vote > 19 ORDER BY display_vote DESC";
         $result = $this->conn->query($sql);
         $rows = array();
         while($row = $result->fetch_assoc()){

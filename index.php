@@ -1,26 +1,26 @@
 <?php
 
-session_start();
-require 'classes/userDAO.php';
-$userdao = new UserAccessObject;
+    session_start();
+    require 'classes/userDAO.php';
+    $userdao = new UserAccessObject;
 
-if(isset($_POST['login'])){
-    
-    $email = $_POST['email'];
-    $password = md5($_POST['password']);
-    
-    $login = $userdao->login($email, $password);
-    
-    if(!empty($login)){
-        $_SESSION['id'] = $login['user_id'];
-        $_SESSION['name'] = $login['user_email'];
-        $_SESSION['logstat'] = "Active";
-        header('Location: home.php');
+    if(isset($_POST['login'])){
+        
+        $email = $_POST['email'];
+        $password = md5($_POST['password']);
+        
+        $login = $userdao->login($email, $password);
+        
+        if(!empty($login)){
+            $_SESSION['id'] = $login['user_id'];
+            $_SESSION['name'] = $login['user_email'];
+            $_SESSION['logstat'] = "Active";
+            header('Location: home.php');
 
-    }else{
-        echo "USER NOT FOUND!";
+        }else{
+            echo "USER NOT FOUND!";
+        }
     }
-}
 ?>
 
 <!DOCTYPE html>
@@ -44,6 +44,7 @@ if(isset($_POST['login'])){
         height: auto;                                          
         margin: 20px auto 20px auto;
         margin-top: 100px;
+        background-color: #ECECEC;
     }
 
     #contacth2{ 
@@ -84,7 +85,7 @@ if(isset($_POST['login'])){
         background-color: #5B5B5B;
         padding: 10px;
         width: 450px;
-        }
+    }
 
         input#submit:hover{
 
@@ -101,7 +102,7 @@ if(isset($_POST['login'])){
 
 </head>
 <body>
-    <div class="form bg-light">
+    <div class="form">
 		<div class="login text-center" >
 			<h1 id="contacth2">Login</h1>
         <form method="post">
