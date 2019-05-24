@@ -1,16 +1,12 @@
 <?php
 
+    ini_set( 'display_errors', 1 );
     session_start();
-
-    if($_SESSION['logstat'] != "Active"){
-        header('Location: index.php');
-    }
-
-    require_once 'classes/popularDAO.php';
-   
-    $display = new Popular;
-    $displaylist = $display->getAllDisplay();
-    $userlist = $display->retrieveALLUser();
+    require_once '../classes/userpageDAO.php';
+    $id = $_GET['id'];
+    $display = new Userpage;
+    $displaylist = $display->getSingleDisplay($id);
+    //$userlist = $display->retrieveAlllUser();
 
     if(isset($_POST['upload'])){
         $user_name = $_POST['user_name'];
@@ -21,10 +17,7 @@
         $directory = "images/";
         $result = $display->addDisplay($user_name, $display_name, $display_user, $display_img, $tmp_file_name, $directory);
     }
-    if(isset($_POST['vote'])){
-        $display->updateVote($_POST['display_id']);
-        setcookie("voted_".$_POST['display_id'], "voted_".$_POST['display_id']);
-    }
+   
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +32,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     
-    <title>HOME</title>
+    <title>User Page</title>
     <style type="text/css"> 
 
     ul.topnav {
@@ -76,14 +69,15 @@
         position: relative;
         left: 1150px;
     }
+
     .btn{
-        background-color: gray;
-        color: #fff
+        background-color: #FF5733;
+        color: white;
         
     }
     
     .btn:hover {
-        background-color: #393A37;
+        background-color: #C70039;
     }
 
     
@@ -113,33 +107,20 @@
     </style>
 </head>
 <body>
-<ul class="topnav">
-	<li><a href="home.php">Home</a></li>
-    <li><a href="popular.php">Popular</a></li>
-    <li><a href="user_ranking.php">User Ranking</a></li>
-    <li class="upload"><a href="upload.php">Upload</a></li>
-    <li class="mypic"><a href="mypic.php">My Picutures</a></li>
-    <li class="logout"><a href="logout.php">Logout</a></li>
-    </li>
-</ul>
-<div class="search mt-3">
-    <form action="" method="post">
-        <input type="text" class="form-controle" name="search">
-        <input type="submit" class="sb btn text-white text-center" name="submit" value="SEARCH">
-    </form>
-</div>
-<div class="container-fuild mt-4">
+
+
+<div class="container-fuild mt-5">
         <div class="row">
             <?php foreach($displaylist as $key=>$value){?>
                 <div class="card bg-light" style="width: 18rem">
-                    <img class="card-img-top" src="<?php echo $value['display_img'];?>" alt="Card image cap">
+                    <img class="card-img-top" src="../<?php echo $value['display_img'];?>" alt="Card image cap">
                     <div class="card-body">
                         <i class="fab fa-gratipay">&nbsp;<?php echo $value['display_vote'];?></i>
                         <h5 class="card-title"><?php echo $value['display_name'];?></h5>
                         <p class="card-text">User:<?php echo $value['user_name']; ?></p>
                         <form action="" method="post">
                             <input type="hidden" name="display_id" value="<?php echo $value['display_id']; ?>">
-                            <input type="submit" value="VOTE" name="vote" class="btn btn-block">
+                            <a href='delete_display.php?id=<?php echo $value['display_id']; ?>' role='botton' class='btn btn-danger btn-block'><i class = 'fas fa-trash'>DELETE</i></a>
                         </form>
                     </div>
                 </div>

@@ -3,6 +3,7 @@
     session_start();
     require 'classes/userDAO.php';
     $userdao = new UserAccessObject;
+   
 
     if(isset($_POST['login'])){
         
@@ -15,7 +16,11 @@
             $_SESSION['id'] = $login['user_id'];
             $_SESSION['name'] = $login['user_email'];
             $_SESSION['logstat'] = "Active";
-            header('Location: home.php');
+            if($login['user_type'] == 'A'){
+                header('Location: admin/admin.php');
+            }else{
+                header('Location: home.php');
+            }
 
         }else{
             echo "USER NOT FOUND!";
@@ -44,7 +49,7 @@
         height: auto;                                          
         margin: 20px auto 20px auto;
         margin-top: 100px;
-        background-color: #ECECEC;
+        
     }
 
     #contacth2{ 

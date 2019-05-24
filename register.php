@@ -9,7 +9,8 @@
 		$userdao->registerUser($user_name, $user_email, $user_password);
 		header('Location: home.php');
 	}
-?> 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +24,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<title>Regiater</title>
 	<style type="text/css">
+	
 	.form{
         border-style: ridge;
         padding: 0px 50px;
@@ -30,7 +32,7 @@
         height: auto;                                          
         margin: 20px auto 20px auto;
         margin-top: 100px;
-        background-color: #ECECEC;
+        
     }
 
     #contacth2{ 
@@ -50,7 +52,8 @@
     }
 
     form{
-        padding: 20px;
+		padding: 50px;
+		margin-left: 0px;
     }
 
     textarea{
@@ -84,18 +87,21 @@
 		</style>
 </head>
 <body>
-
-	<form method="post">
-		<dl>
-			<dt><label for="q1">Name</label></dt>
-			<dd><input type="text" name="user_name" id="q1" size="30" placeholder="○○ ○○"></dd>
-			<dt><label for="q2">E-mail</label></dt>
-			<dd><input type="email" name="user_email" id="q2"  size="50" placeholder="○○○@○○○.com"></dd>
-			<dt><label for="q3">Password</label></dt>
-			<dd><input type="password" name="user_password" id="q3" size="30" placeholder="○○○○○○○○"></dd>
-		</dl>
-		<button type="submit" name="register">Register</button>
-		<a href="index.php">Login is here</a>
-	</form>
+　	 <div class="form">
+		<form method="post">
+			<div class="text-center">
+				<dl>
+					<dt><label for="q1">Name</label></dt>
+					<dd><input type="text" name="user_name" id="q1" size="30" placeholder="○○ ○○"></dd>
+					<dt><label for="q2">E-mail</label></dt>
+					<dd><input type="email" name="user_email" id="q2"  size="50" placeholder="○○○@○○○.com"></dd>
+					<dt><label for="q3">Password</label></dt>
+					<dd><input type="password" name="user_password" id="q3" size="30" placeholder="○○○○○○○○"></dd>
+				</dl>
+				<input type="submit" name="register" id="submit" value="REGISTER"><br>
+				<a href="index.php">Login is here</a>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

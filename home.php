@@ -94,6 +94,7 @@
 
     
     .card{
+        background-color:  #F5F5F5;
         display: inline-block;
         padding: 10px;
         margin-left: 65px; 
@@ -137,7 +138,7 @@
 <div class="container-fuild mt-4">
         <div class="row">
             <?php foreach($displaylist as $key=>$value){?>
-                <div class="card bg-light" style="width: 18rem">
+                <div class="card" style="width: 18rem">
                     <img class="card-img-top" src="<?php echo $value['display_img'];?>" alt="Card image cap">
                     <div class="card-body">
                         <i class="fab fa-gratipay">&ensp;<?php echo $value['display_vote'];?></i>
@@ -152,7 +153,7 @@
                                 $disable=NULL;
                             }
                             ?>
-                            <input type="submit" value="VOTE" name="vote" class="btn btn-block" <?php echo $disable; ?> />
+                            <input type="submit" value="VOTE" name="vote" class="btn btn-block" <?php echo $disable; ?> >
                         </form>
                     </div>
                 </div>
